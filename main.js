@@ -145,14 +145,9 @@ function applyLang(lang) {
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
-  const btn = document.getElementById('lang-btn');
-  btn.textContent = lang === 'es' ? 'EN' : 'ES';
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 }
-
-document.getElementById('lang-btn').addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-lang');
-  applyLang(current === 'es' ? 'en' : 'es');
-});
 
 // ── Orbital cursor ──────────────────────────────────────────
 const canvas = document.getElementById('cursor-canvas');
@@ -261,7 +256,7 @@ window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
   navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--cyan)' : '';
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
   });
 });
 
